@@ -1,0 +1,16 @@
+# 系统与缓存
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 测试与临时环境
+.qa/
+.chrome-profile*/
+tmp_*
+*.log
+
+# 依赖（本项目运行时无依赖，仅测试用）
+node_modules/
+
+# 对外报价等商务文件不进仓库
+docs/产品说明与报价.md

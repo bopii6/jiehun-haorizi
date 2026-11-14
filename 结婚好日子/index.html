@@ -1,0 +1,377 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>结婚好日子 · 挑一个两家人都点头的日子</title>
+<meta name="description" content="输入新郎、新娘与双方父母的生辰，按通书择日规则筛出三个适合结婚的日子，并给出当天吉时与逐条理由。">
+<meta name="theme-color" content="#A8322B">
+<meta property="og:type" content="website">
+<meta property="og:title" content="结婚好日子 · 挑一个两家人都点头的日子">
+<meta property="og:description" content="六个人的生辰，三百多天里挑三个日子。规则全部摊开写，不做命理预测。">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23A8322B'/%3E%3Ctext x='32' y='45' font-size='40' text-anchor='middle' fill='%23F3EEE2' font-family='KaiTi,serif'%3E%E5%90%88%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<a class="skip" href="#form">跳到填写生辰</a>
+
+<div class="topline" aria-hidden="true"></div>
+
+<div class="masthead">
+<header class="topbar">
+  <a class="brand" href="#top">
+    <span class="brand__seal" aria-hidden="true">合</span>
+    <span class="brand__text">
+      <span class="brand__name">结婚好日子</span>
+      <span class="brand__sub">择日 · 合婚帖</span>
+    </span>
+  </a>
+  <nav class="topnav">
+    <a href="#method">怎么挑的</a>
+    <a href="#faq">常问</a>
+    <a class="topnav__cta" href="#form">开始合日子</a>
+  </nav>
+</header>
+</div>
+
+<main id="top">
+
+  <!-- ── 首屏 ─────────────────────────────────────── -->
+  <section class="cover">
+    <span class="cover__xi" aria-hidden="true">囍</span>
+    <div class="cover__inner">
+      <div class="cover__vertical"><h1 class="cover__title">一纸婚书<em>先定一个日子</em></h1></div>
+      <div class="cover__copy">
+        <p class="cover__kicker"><span>民俗择日</span>不排命理</p>
+        
+        <p class="cover__lede">六个人的生辰，一年三百多天，<br>挑三个都合规矩的日子。</p>
+        <div class="cover__actions">
+          <a class="btn btn--gold" href="#form">开始合日子</a>
+          <a class="btn btn--line" href="#method">看看择日规则</a>
+        </div>
+        <p class="cover__note">不收费 · 不上传 · 全在本机算</p>
+      </div>
+
+      <div class="cover__side">
+      <aside class="tongshu" id="todayCard" aria-label="今日通书">
+      <div class="tongshu__head">
+        <span>今日通书</span>
+        <span class="tongshu__date" id="todayDate">—</span>
+      </div>
+      <div class="tongshu__body">
+        <div class="tongshu__num">
+          <span class="tongshu__day" id="todayLunarDay">初六</span>
+          <span class="tongshu__lunar" id="todayLunar">—</span>
+        </div>
+        <div class="tongshu__gz">
+          <span id="todayGZ">—</span>
+          <span class="tongshu__tiny" id="todayShen">—</span>
+        </div>
+      </div>
+      <div class="tongshu__yiji">
+        <div class="yiji">
+          <span class="yiji__tag yiji__tag--yi">宜</span>
+          <span class="yiji__list" id="todayYi">—</span>
+        </div>
+        <div class="yiji">
+          <span class="yiji__tag yiji__tag--ji">忌</span>
+          <span class="yiji__list" id="todayJi">—</span>
+        </div>
+      </div>
+      <div class="tongshu__foot" id="todayFoot">—</div>
+      </aside>
+      <p class="hero__caption">上面是今天的日子。你们要的那个，从这个表格里筛出来。</p>
+      </div>
+    </div>
+    <div class="cover__tear" aria-hidden="true"></div>
+  </section>
+
+  <!-- ── 表单 ─────────────────────────────────────── -->
+  <section class="section" id="form">
+    <div class="section__head">
+      <span class="section__no" id="noForm">其一</span>
+      <h2 class="section__title">六个人的生辰</h2>
+      <p class="section__lede">新人生日必填，时辰可留空；父母选填。</p>
+    </div>
+
+    <form class="paper" id="birthForm" novalidate>
+      <div class="couple">
+        <fieldset class="person person--main">
+          <legend class="person__legend"><span class="person__tag">新郎</span></legend>
+          <div class="field">
+            <span class="field__label">出生日期</span>
+            <div class="birth" id="bpGroom" data-key="groom" data-min="1940" data-max="2008"></div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="groomHour">出生时辰</label>
+              <select id="groomHour"></select>
+            </div>
+            <div class="field">
+              <label for="groomName">称呼<em>（选填）</em></label>
+              <input type="text" id="groomName" placeholder="例如 陈默" autocomplete="off">
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="couple__link" aria-hidden="true">合</div>
+
+        <fieldset class="person person--main">
+          <legend class="person__legend"><span class="person__tag">新娘</span></legend>
+          <div class="field">
+            <span class="field__label">出生日期</span>
+            <div class="birth" id="bpBride" data-key="bride" data-min="1940" data-max="2008"></div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="brideHour">出生时辰</label>
+              <select id="brideHour"></select>
+            </div>
+            <div class="field">
+              <label for="brideName">称呼<em>（选填）</em></label>
+              <input type="text" id="brideName" placeholder="例如 林小满" autocomplete="off">
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <details class="parents" id="parentsBox">
+        <summary class="parents__summary">
+          <span class="parents__title">双方父母</span>
+          <span class="parents__hint">选填 · 填了会避开冲父母生肖的日子</span>
+          <span class="parents__toggle" aria-hidden="true">展开</span>
+        </summary>
+        <div class="parents__grid">
+          <fieldset class="person">
+            <legend class="person__legend">新郎父亲</legend>
+            <div class="field">
+              <span class="field__label">出生日期</span>
+              <div class="birth birth--sm" id="bpGpa" data-key="gpa" data-min="1925" data-max="1990"></div>
+            </div>
+            <div class="field">
+              <label for="gpaHour">时辰</label>
+              <select id="gpaHour"></select>
+            </div>
+          </fieldset>
+          <fieldset class="person">
+            <legend class="person__legend">新郎母亲</legend>
+            <div class="field">
+              <span class="field__label">出生日期</span>
+              <div class="birth birth--sm" id="bpGma" data-key="gma" data-min="1925" data-max="1990"></div>
+            </div>
+            <div class="field">
+              <label for="gmaHour">时辰</label>
+              <select id="gmaHour"></select>
+            </div>
+          </fieldset>
+          <fieldset class="person">
+            <legend class="person__legend">新娘父亲</legend>
+            <div class="field">
+              <span class="field__label">出生日期</span>
+              <div class="birth birth--sm" id="bpBpa" data-key="bpa" data-min="1925" data-max="1990"></div>
+            </div>
+            <div class="field">
+              <label for="bpaHour">时辰</label>
+              <select id="bpaHour"></select>
+            </div>
+          </fieldset>
+          <fieldset class="person">
+            <legend class="person__legend">新娘母亲</legend>
+            <div class="field">
+              <span class="field__label">出生日期</span>
+              <div class="birth birth--sm" id="bpBma" data-key="bma" data-min="1925" data-max="1990"></div>
+            </div>
+            <div class="field">
+              <label for="bmaHour">时辰</label>
+              <select id="bmaHour"></select>
+            </div>
+          </fieldset>
+        </div>
+      </details>
+
+      <div class="range">
+        <div class="range__row">
+          <span class="range__label">打算什么时候办</span>
+          <div class="range__controls">
+            <label class="sr-only" for="startYear">起始年份</label>
+            <select id="startYear"></select>
+            <label class="sr-only" for="startMonth">起始月份</label>
+            <select id="startMonth"></select>
+            <span class="range__from">起，往后</span>
+            <div class="segmented" id="spanGroup" role="group" aria-label="往后看多久">
+              <button type="button" data-months="6">半年</button>
+              <button type="button" data-months="12" class="is-on">一年</button>
+              <button type="button" data-months="18">一年半</button>
+            </div>
+          </div>
+        </div>
+        <div class="range__row">
+          <span class="range__label" id="prefsLabel">额外的讲究</span>
+          <div class="checks">
+            <label class="check" for="prefWeekend"><input type="checkbox" id="prefWeekend" checked><span>优先排在周末</span></label>
+            <label class="check" for="prefAvoid7"><input type="checkbox" id="prefAvoid7"><span>避开农历七月</span></label>
+            <label class="check" for="prefAvoid6"><input type="checkbox" id="prefAvoid6"><span>避开农历六月</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="submit-row">
+        <button class="btn btn--primary btn--lg" type="submit" id="submitBtn">合一个日子</button>
+        <p class="submit-hint" id="formHint">两分钟填完，直接出结果。不收费，也不上传。<a href="#" id="exampleLink" class="inline-link">没头绪？填一组示例</a></p>
+      </div>
+      <p class="form-error" id="formError" role="alert" hidden></p>
+    </form>
+  </section>
+
+  <!-- ── 结果 ─────────────────────────────────────── -->
+  <section class="section section--results" id="results" hidden>
+    <header class="print-head" id="printHead" aria-hidden="true"></header>
+    <div class="section__head">
+      <span class="section__no" id="noResult">其二</span>
+      <h2 class="section__title" id="resultTitle">三个日子</h2>
+      <p class="section__lede" id="resultLede"></p>
+      <p class="result-note" id="resultNote" hidden></p>
+      <div class="stats" id="resultStats"></div>
+      <p class="stats__foot" id="statsFoot"></p>
+      <div class="quick" id="quickActions" hidden>
+        <button type="button" class="quick__btn" id="qaPoster">存成一张图</button>
+        <button type="button" class="quick__btn" id="qaLink">复制分享链接</button>
+        <button type="button" class="quick__btn" id="qaInvite">发电子请柬</button>
+        <button type="button" class="quick__btn" id="qaPrint">打印择日帖</button>
+      </div>
+      <p class="rule-stamp">规则表 v1.0 · 依据《协纪辨方书》《玉匣记》通书择日法 · 民俗参考，不作命理预测</p>
+    </div>
+
+    <div class="cards-wrap">
+      <svg class="thread" viewBox="0 0 1000 160" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 96 C 240 18, 760 18, 1000 96" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="0" />
+        <circle cx="500" cy="50" r="7" fill="currentColor" />
+      </svg>
+      <div class="cards" id="cards"></div>
+    </div>
+
+    <div class="extras" id="extras" hidden></div>
+
+    <div class="flow" id="flow" hidden></div>
+
+    <div class="bazi-block">
+      <p class="bazi-block__label">合的是这六个人的八字</p>
+      <div class="bazi-strip" id="baziStrip"></div>
+    </div>
+
+    <div class="yearmap" id="yearmap" hidden></div>
+
+    <div class="aftercards">
+      <button class="link-btn" type="button" id="toggleAlts" aria-expanded="false">看另外九个备选日子</button>
+      <div class="alts" id="alts" hidden></div>
+    </div>
+
+    <div class="result-actions">
+      <button class="btn btn--ink" type="button" id="printBtn">打印成一张择日帖</button>
+      <button class="btn btn--ghost" type="button" id="copyBtn">复制成文字发给家里人</button>
+      <button class="btn btn--primary" type="button" id="posterBtn">做成一张图，发家庭群</button>
+      <button class="btn btn--ghost" type="button" id="elderBtn">给长辈看的一页</button>
+      <button class="btn btn--ghost" type="button" id="editBtn">改条件，重新合</button>
+    </div>
+    <div class="print-plan" id="printPlan"></div>
+    <section class="print-flow" id="printFlow"></section>
+    <div class="print-foot" id="printFoot"></div>
+  </section>
+
+  <!-- ── 方法 ─────────────────────────────────────── -->
+  <section class="section section--ink" id="method">
+    <div class="section__head">
+      <span class="section__no" id="noMethod">其二</span>
+      <h2 class="section__title">这个日子是怎么挑出来的</h2>
+      <p class="section__lede">四道手续，从三百多天筛到三天。</p>
+    </div>
+
+    <ol class="steps">
+      <li class="step">
+        <span class="step__no">一</span>
+        <h3 class="step__title">划掉不能用的</h3>
+        <p>忌嫁娶、月破、四离四绝、杨公忌、三娘煞。</p>
+      </li>
+      <li class="step">
+        <span class="step__no">二</span>
+        <h3 class="step__title">避开冲撞</h3>
+        <p>不冲两位新人的生肖与日支，也不冲双方父母。</p>
+      </li>
+      <li class="step">
+        <span class="step__no">三</span>
+        <h3 class="step__title">按吉神加分</h3>
+        <p>黄道、建除、天德月德、三合六合、天喜红鸾。</p>
+      </li>
+      <li class="step">
+        <span class="step__no">四</span>
+        <h3 class="step__title">取最高分三天</h3>
+        <p>彼此隔开一个月，再排当天两个吉时。</p>
+      </li>
+    </ol>
+
+    <div class="caveat">
+      <h3>两句实在话</h3>
+      <p>择日依据通书规则，是民俗参考，不是命理预测。说到底，酒店有没有档期、亲戚来不来得及，才是最后拍板的两件事。</p>
+    </div>
+  </section>
+
+  <!-- ── 常问 ─────────────────────────────────────── -->
+  <section class="section" id="faq">
+    <div class="section__head">
+      <span class="section__no" id="noFaq">其三</span>
+      <h2 class="section__title">常问的几句</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>时辰记不清了还能算吗？</summary>
+        <p>能。时辰只影响时柱，生肖、日柱和冲煞都不受影响。</p>
+      </details>
+      <details>
+        <summary>父母不愿意给生辰？</summary>
+        <p>选填。不填就只按两位新人算，只是不再检查冲父母生肖。</p>
+      </details>
+      <details>
+        <summary>会上传吗？</summary>
+        <p>不会。页面没有后端，关掉就没了。</p>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer__brand">
+    <span class="brand__seal brand__seal--small" aria-hidden="true">合</span>
+    <span>结婚好日子</span>
+  </div>
+  <p class="footer__note">依通书择日，属民俗文化参考，不做命理预测。愿两家人都满意。</p>
+  <p class="footer__copy">© 2026 结婚好日子 · 规则表 v1.0</p>
+</footer>
+
+<div class="poster" id="elderModal" hidden>
+  <div class="poster__box poster__box--paper" role="dialog" aria-modal="true" aria-label="给长辈看的一页">
+    <div class="elder" id="elderBody"></div>
+    <div class="poster__actions">
+      <button class="btn btn--primary" type="button" id="copyElder">复制这段话</button>
+      <button class="btn btn--ghost" type="button" id="elderClose">关掉</button>
+    </div>
+  </div>
+</div>
+
+<div class="poster" id="posterModal" hidden>
+  <div class="poster__box" role="dialog" aria-modal="true" aria-label="分享图">
+    <img id="posterImg" alt="三个日子的分享图">
+    <div class="poster__actions">
+      <a class="btn btn--primary" id="posterDownload" download="结婚好日子-三个日子.png" href="#">保存图片</a>
+      <button class="btn btn--ghost" type="button" id="posterClose">关掉</button>
+    </div>
+    <p class="poster__hint">手机上长按图片也能保存</p>
+  </div>
+</div>
+
+<script src="assets/vendor/lunar.js"></script>
+<script src="assets/vendor/qrcode.js"></script>
+<script src="assets/engine.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

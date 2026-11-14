@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>婚礼请柬</title>
+<meta name="theme-color" content="#B3261E">
+<style>
+  :root {
+    --red: #B3261E;
+    --red-deep: #8E1811;
+    --cream: #F8EFDC;
+    --gold: #E0BE7E;
+    --ink: #2A1A12;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    position: relative;
+    background: var(--red);
+    color: var(--cream);
+    font-family: "Songti SC", "SimSun", "Noto Serif SC", serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  .page {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 26px 22px 40px;
+    position: relative;
+  }
+  .frame {
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(224, 190, 126, .55);
+    pointer-events: none;
+  }
+  .frame::after {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(224, 190, 126, .28);
+  }
+  .xi {
+    font-family: "Kaiti SC", "STKaiti", KaiTi, serif;
+    font-size: 84px;
+    line-height: 1;
+    text-align: center;
+    color: var(--cream);
+    margin: 18px 0 6px;
+    text-shadow: 0 0 30px rgba(0,0,0,.18);
+  }
+  .kicker {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: .5em;
+    color: var(--gold);
+    margin: 0 0 18px;
+  }
+  h1 {
+    font-family: "Kaiti SC", "STKaiti", KaiTi, serif;
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 1.5;
+    text-align: center;
+    letter-spacing: .08em;
+    margin: 0 0 6px;
+  }
+  .names {
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: .3em;
+    color: var(--gold);
+    margin: 0 0 26px;
+  }
+  .when {
+    text-align: center;
+    padding: 22px 10px;
+    border-top: 1px solid rgba(224,190,126,.4);
+    border-bottom: 1px solid rgba(224,190,126,.4);
+    margin-bottom: 26px;
+  }
+  .when .date {
+    font-family: "Iowan Old Style", Georgia, "Times New Roman", serif;
+    font-size: 30px;
+    letter-spacing: .02em;
+    line-height: 1.3;
+  }
+  .when .lunar { margin-top: 8px; font-size: 13.5px; letter-spacing: .14em; color: var(--gold); }
+  .when .week { margin-top: 4px; font-size: 12.5px; letter-spacing: .2em; color: rgba(248,239,220,.7); }
+
+  section { margin-bottom: 24px; }
+  h2 {
+    font-family: "Kaiti SC", "STKaiti", KaiTi, serif;
+    font-weight: 400;
+    font-size: 17px;
+    letter-spacing: .26em;
+    color: var(--gold);
+    margin: 0 0 12px;
+  }
+  .place { font-size: 16px; line-height: 1.9; letter-spacing: .04em; }
+  .place .addr { font-size: 13px; color: rgba(248,239,220,.72); letter-spacing: .06em; }
+  .place .empty { font-size: 13px; color: rgba(248,239,220,.55); }
+
+  ol.flow { list-style: none; margin: 0; padding: 0; }
+  ol.flow li {
+    display: grid;
+    grid-template-columns: 64px 16px 1fr;
+    gap: 6px;
+    align-items: start;
+    padding: 10px 0;
+    border-bottom: 1px dotted rgba(224,190,126,.3);
+  }
+  ol.flow li:last-child { border-bottom: 0; }
+  .t { font-family: Georgia, "Times New Roman", serif; font-size: 16px; color: var(--gold); }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(224,190,126,.8); margin-top: 8px; justify-self: center; }
+  .flow b { font-weight: 400; font-size: 15px; letter-spacing: .04em; }
+
+  .rsvp {
+    border: 1px solid rgba(224,190,126,.5);
+    padding: 20px;
+    text-align: center;
+  }
+  .rsvp p { margin: 0 0 14px; font-size: 13.5px; line-height: 1.9; color: rgba(248,239,220,.86); }
+  .rsvp button {
+    appearance: none;
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--cream);
+    font-family: inherit;
+    font-size: 14px;
+    letter-spacing: .18em;
+    padding: 11px 26px;
+    cursor: pointer;
+  }
+  .rsvp button:active { background: rgba(224,190,126,.18); }
+
+  footer {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 11.5px;
+    letter-spacing: .28em;
+    color: rgba(248,239,220,.6);
+  }
+  .brand { font-family: "Kaiti SC", "STKaiti", KaiTi, serif; color: var(--gold); }
+  @media (max-width: 380px) {
+    .xi { font-size: 68px; }
+    h1 { font-size: 28px; }
+    .when .date { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="frame" aria-hidden="true"></div>
+<div class="page">
+  <div class="xi">囍</div>
+  <p class="kicker">WEDDING</p>
+  <h1 id="title">我们要结婚了</h1>
+  <p class="names" id="names"></p>
+
+  <div class="when">
+    <div class="date" id="date">—</div>
+    <div class="lunar" id="lunar"></div>
+    <div class="week" id="week"></div>
+  </div>
+
+  <section>
+    <h2>地点</h2>
+    <div class="place" id="place"><span class="empty">地点与席位，请联系新人确认</span></div>
+  </section>
+
+  <section>
+    <h2>当天流程</h2>
+    <ol class="flow" id="flow"></ol>
+  </section>
+
+  <section class="rsvp">
+    <p>看到请柬，回一句就好。<br>来几个人、几点到，告诉我们就行。</p>
+    <button type="button" id="rsvpBtn">复制回复</button>
+  </section>
+
+  <footer>
+    <span class="brand">结婚好日子</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var data = {};
+  try {
+    var raw = (location.hash || '').replace(/^#d=/, '');
+    if (raw) data = JSON.parse(decodeURIComponent(escape(atob(raw))));
+  } catch (e) { /* 用默认空数据 */ }
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  if (data.g || data.b) {
+    $('names').textContent = (data.g || '新郎') + '  ·  ' + (data.b || '新娘');
+  }
+  if (data.date) {
+    var m = /(\d{4}) 年 (\d{1,2}) 月 (\d{1,2}) 日（(.+?)）/.exec(data.date);
+    if (m) {
+      $('date').textContent = m[1] + '.' + m[2] + '.' + m[3];
+      $('week').textContent = m[4].split('，')[0];
+    } else {
+      $('date').textContent = data.date;
+    }
+  }
+  if (data.lunar) $('lunar').textContent = data.lunar;
+
+  if (data.venue || data.addr) {
+    $('place').innerHTML = (data.venue ? '<div>' + data.venue + '</div>' : '') +
+      (data.addr ? '<div class="addr">' + data.addr + '</div>' : '');
+  }
+
+  if (data.flow && data.flow.length) {
+    $('flow').innerHTML = data.flow.map(function (f) {
+      return '<li><span class="t">' + f.t + '</span><span class="dot"></span><b>' + f.title + '</b></li>';
+    }).join('');
+  } else {
+    $('flow').innerHTML = '<li><span class="t">—</span><span class="dot"></span><b>流程以当天安排为准</b></li>';
+  }
+
+  $('rsvpBtn').addEventListener('click', function () {
+    var text = '收到请柬啦，我们会准时到。' + (data.date ? '（' + data.date + '）' : '');
+    var btn = this;
+    var done = function () { var old = btn.textContent; btn.textContent = '已复制'; setTimeout(function () { btn.textContent = old; }, 1600); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { done(); });
+    } else { done(); }
+  });
+})();
+</script>
+</body>
+</html>
